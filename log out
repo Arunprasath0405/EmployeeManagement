@@ -1,0 +1,23 @@
+[33mcommit a3fc0dfae72bb4c97a436a8e38cf948b909f8f0b[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Arun <arunprasath4501@gmail.com>
+Date:   Sat Nov 18 12:46:41 2023 +0530
+
+    Initial Commit
+
+[33mcommit e6fdb7103d2e50163d6a81d1da53bba56cb5336b[m
+Author: Arun <arunprasath4501@gmail.com>
+Date:   Fri Oct 13 12:28:07 2023 +0530
+
+    Trial comment
+
+[33mcommit 9159b9fdb2d69da54a52dd63d11d3956f647d1ee[m
+Author: Arun <arunprasath4501@gmail.com>
+Date:   Fri Oct 13 12:26:45 2023 +0530
+
+    Add project files.
+
+[33mcommit b488f7157e85c550d93a26376dff504d64feb475[m
+Author: Arun <arunprasath4501@gmail.com>
+Date:   Fri Oct 13 12:26:35 2023 +0530
+
+    Add .gitattributes and .gitignore.

@@ -1,14 +1,16 @@
 ﻿using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Mvc;
 using EmployeeManagement.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace EmployeeManagement.Controllers
 {
     public class EmployeesController : Controller
     {
-        private ApplicationDbContext applicationDbContext;
+        private ApplicationDbContext _applicationDbContext;
         public EmployeesController(ApplicationDbContext applicationDbContext)
         {
-                this.applicationDbContext = applicationDbContext;
+                _applicationDbContext = applicationDbContext;
         }
         [HttpGet]
         public IActionResult Add()
@@ -22,25 +24,32 @@ namespace EmployeeManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddEmployeeViewModel addEmployeeRequest)
         {
+            await _applicationDbContext.Database.OpenConnectionAsync();
+            _applicationDbContext.EnableIdentityInsert("EmployeeDetails", true);
             var employee = new EmployeeDetails()
             {
                 EmployeeId = addEmployeeRequest.EmployeeId,
                 EmployeeName = addEmployeeRequest.EmployeeName,
                 EmployeeAge = addEmployeeRequest.EmployeeAge,
-                Email = addEmployeeRequest.Email
+                Email = addEmployeeRequest.Email,
+                salary = addEmployeeRequest.salary,
+                City = addEmployeeRequest.City,
+                Street = addEmployeeRequest.Street, 
+                Region = addEmployeeRequest.Region,
+                DateOfBirth = addEmployeeRequest.DateOfBirth,
             };
-            await applicationDbContext.EmployeeDetails.AddAsync(employee);
-            try
-            {
-                await applicationDbContext.SaveChangesAsync();
-                return RedirectToAction("Successful");
-            }
-            catch (Exception ex)
-            {
-                applicationDbContext.SaveChanges();
-                return RedirectToAction("Add");
-            }
+            await _applicationDbContext.EmployeeDetails.AddAsync(employee);
+            await _applicationDbContext.SaveChangesAsync();
+            await _applicationDbContext.Database.CloseConnectionAsync();
+            return RedirectToAction("Successful");
+
         }
+        [HttpGet]
+        public IActionResult Successful()
+        {
+            return View();
+        }
+        
     }
     
 }

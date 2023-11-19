@@ -1,0 +1,1 @@
+select Employee from sys.databases;

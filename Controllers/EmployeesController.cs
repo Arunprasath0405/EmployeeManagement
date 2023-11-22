@@ -72,15 +72,33 @@ namespace EmployeeManagement.Controllers
                 Password = addcredentials.Password,
                 ConfirmPassword = addcredentials.ConfirmPassword,
             };
+            var employees = await _applicationDbContext.EmployeeDetails.ToListAsync();
             await _applicationDbContext.Credentials.AddAsync(credentials);
             await _applicationDbContext.SaveChangesAsync();
-            await _applicationDbContext.Database.CloseConnectionAsync();
-            return RedirectToAction("Successful");
+            await _applicationDbContext.Database.OpenConnectionAsync();
+
+            return View("EmployeeDetails", employees);
         }
         [HttpGet]
         public IActionResult LoginPage()
         {
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> LoginPage(Credentials credentials)
+        {
+            await _applicationDbContext.Database.OpenConnectionAsync();
+            var user = await _applicationDbContext.Credentials.FirstOrDefaultAsync(u => u.Username == credentials.Username); 
+            if(user!=null && user.Password == credentials.Password)
+            {
+                var employees = await _applicationDbContext.EmployeeDetails.ToListAsync();
+                await _applicationDbContext.Database.CloseConnectionAsync();
+                return View("EmployeeDetails", employees);
+            }
+            else
+            {
+                return View("Registration");
+            }
         }
 
     }

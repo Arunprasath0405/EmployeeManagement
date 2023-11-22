@@ -1,0 +1,107 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<EmployeeManagement.Models.EmployeeDetails>
+
+<table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+        <tr>
+            <th>Employee Id</th>
+            <th>Employee Name</th>
+            <th>Employee Age</th>
+            <th>Email </th>
+            <th>City</th>
+            <th>Date Of Birth</th>
+            <th>Region</th>
+            <th>Street</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var employee in Model)
+        {
+        <tr>
+            <td>
+                <div class="d-flex align-items-center">
+                    <img src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+                         alt=""
+                         style="width: 45px; height: 45px"
+                         class="rounded-circle" />
+                    <div class="ms-3">
+                        <p class="fw-bold mb-1">@employee.EmployeeId</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">@employee.EmployeeName</p>
+            </td>
+            <td>
+                    <p class="fw-normal mb-1">@employee.EmployeeAge</p>
+            </td>
+            <td>
+                    <p class="fw-normal mb-1">@employee.Email</p>
+            </td>
+            <td>
+                    <p class="fw-normal mb-1">@employee.City</p>
+
+            </td>
+                <td>
+                    <p class="fw-normal mb-1">@employee.DateOfBirth</p>
+
+                </td>
+                <td>
+                    <p class="fw-normal mb-1">@employee.Region</p>
+
+                </td>
+                <td>
+                    <p class="fw-normal mb-1">@employee.City</p>
+
+                </td>
+                <td>
+                    <p class="fw-normal mb-1">@employee.Street</p>
+
+                </td>
+                <td>
+                    <p class="fw-normal mb-1">@employee.salary</p>
+
+                </td>
+        </tr>
+        
+        }
+    </tbody>
+</table>
+
+<!--<h1>Employee Details</h1>
+<table class="Table">
+    <thead>
+        <tr>
+            <td>Employee Id</td>
+            <td>Employee Name</td>
+            <td>Employee Age</td>
+            <td>Email </td>
+            <td>City</td>
+            <td>Date Of Birth</td>
+            <td>Region</td>
+            <td>Street</td>
+            <td>Salary</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var employee in Model)
+        {
+            <tr>
+                <td>@employee.EmployeeId</td>
+                <td>@employee.EmployeeName</td>
+                <td>@employee.EmployeeAge</td>
+                <td>@employee.Email</td>
+                <td>@employee.City</td>
+                <td>@employee.DateOfBirth.ToString("DD/MM/YYYY")</td>
+                <td>@employee.Region</td>
+                <td>@employee.Street</td>
+                <td>@employee.salary</td>
+            </tr>
+        }
+    </tbody>
+</table>-->

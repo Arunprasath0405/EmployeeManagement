@@ -24,24 +24,30 @@ namespace EmployeeManagement.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddEmployeeViewModel addEmployeeRequest)
         {
-            await _applicationDbContext.Database.OpenConnectionAsync();
-            _applicationDbContext.EnableIdentityInsert("EmployeeDetails", true);
-            var employee = new EmployeeDetails()
+            try
             {
-                EmployeeId = addEmployeeRequest.EmployeeId,
-                EmployeeName = addEmployeeRequest.EmployeeName,
-                EmployeeAge = addEmployeeRequest.EmployeeAge,
-                Email = addEmployeeRequest.Email,
-                salary = addEmployeeRequest.salary,
-                City = addEmployeeRequest.City,
-                Street = addEmployeeRequest.Street, 
-                Region = addEmployeeRequest.Region,
-                DateOfBirth = addEmployeeRequest.DateOfBirth,
-            };
-            await _applicationDbContext.EmployeeDetails.AddAsync(employee);
-            await _applicationDbContext.SaveChangesAsync();
-            await _applicationDbContext.Database.CloseConnectionAsync();
-            return RedirectToAction("Successful");
+                await _applicationDbContext.Database.OpenConnectionAsync();
+                _applicationDbContext.EnableIdentityInsert("EmployeeDetails", true);
+                var employee = new EmployeeDetails()
+                {
+                    EmployeeId = addEmployeeRequest.EmployeeId,
+                    EmployeeName = addEmployeeRequest.EmployeeName,
+                    EmployeeAge = addEmployeeRequest.EmployeeAge,
+                    Email = addEmployeeRequest.Email,
+                    salary = addEmployeeRequest.salary,
+                    City = addEmployeeRequest.City,
+                    Street = addEmployeeRequest.Street,
+                    Region = addEmployeeRequest.Region,
+                    DateOfBirth = addEmployeeRequest.DateOfBirth,
+                };
+                await _applicationDbContext.EmployeeDetails.AddAsync(employee);
+                await _applicationDbContext.SaveChangesAsync();
+                await _applicationDbContext.Database.CloseConnectionAsync();
+                return RedirectToAction("Successful");
+            }
+            catch(Exception ex) {
+                return RedirectToAction("Add");
+                    }
 
         }
         [HttpGet]
@@ -49,7 +55,17 @@ namespace EmployeeManagement.Controllers
         {
             return View();
         }
-        
+        [HttpGet]
+        public IActionResult Registration()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult LoginPage()
+        {
+            return View();
+        }
+
     }
     
 }

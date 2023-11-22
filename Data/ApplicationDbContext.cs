@@ -8,6 +8,7 @@ namespace EmployeeManagement.Data
         {
         }
         public DbSet<EmployeeDetails> EmployeeDetails {  get; set; }
+        public DbSet<Credentials> Credentials { get; set; }
         public void EnableIdentityInsert(string tableName, bool enable)
         {
             // This method executes raw SQL to enable or disable IDENTITY_INSERT for the specified table

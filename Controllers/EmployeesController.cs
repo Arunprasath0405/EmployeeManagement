@@ -13,10 +13,11 @@ namespace EmployeeManagement.Controllers
                 _applicationDbContext = applicationDbContext;
         }
         [HttpGet]
-        public IActionResult Add()
+        public ActionResult Add()
         {
             return View();
         }
+        [HttpGet]
         public IActionResult Error()
         {
             return View();
@@ -46,7 +47,7 @@ namespace EmployeeManagement.Controllers
                 return RedirectToAction("Successful");
             }
             catch(Exception ex) {
-                return RedirectToAction("Add");
+                return RedirectToAction();
                     }
 
         }
@@ -59,6 +60,22 @@ namespace EmployeeManagement.Controllers
         public IActionResult Registration()
         {
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Registration(Credentials addcredentials)
+        {
+            await _applicationDbContext.Database.OpenConnectionAsync();
+            var credentials = new Credentials()
+            {
+                Username = addcredentials.Username,
+                EmailId = addcredentials.EmailId,
+                Password = addcredentials.Password,
+                ConfirmPassword = addcredentials.ConfirmPassword,
+            };
+            await _applicationDbContext.Credentials.AddAsync(credentials);
+            await _applicationDbContext.SaveChangesAsync();
+            await _applicationDbContext.Database.CloseConnectionAsync();
+            return RedirectToAction("Successful");
         }
         [HttpGet]
         public IActionResult LoginPage()

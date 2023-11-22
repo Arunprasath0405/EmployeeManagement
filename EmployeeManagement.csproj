@@ -6,12 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Views\Employees\**" />
-    <Content Remove="Views\Employees\**" />
-    <EmbeddedResource Remove="Views\Employees\**" />
-    <None Remove="Views\Employees\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="Views\Employees\Add.cshtml" />
